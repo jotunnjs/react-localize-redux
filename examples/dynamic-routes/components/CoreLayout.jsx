@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { localize, getTranslate, getActiveLanguage, Translate, setActiveLanguage } from 'react-localize-redux';
 import { getLanguages } from '../../../src/locale';
+import Tester from './Tester';
 
 const CoreLayout = ({ children, count, click, setActiveLanguage }) => {
   let items = [];
@@ -15,6 +16,7 @@ const CoreLayout = ({ children, count, click, setActiveLanguage }) => {
   return (
     <div>
       <header>
+        <Tester />
         <Translate id="welcome-page" />
 
         <Translate>

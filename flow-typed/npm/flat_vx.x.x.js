@@ -14,5 +14,25 @@
  */
 
 declare module 'flat' {
-  declare export function flatten(Object, options: ?any): Object;
+  declare module.exports: any;
+}
+
+/**
+ * We include stubs for each file inside this npm package in case you need to
+ * require those files directly. Feel free to delete any files that aren't
+ * needed.
+ */
+declare module 'flat/test/test' {
+  declare module.exports: any;
+}
+
+// Filename aliases
+declare module 'flat/index' {
+  declare module.exports: $Exports<'flat'>;
+}
+declare module 'flat/index.js' {
+  declare module.exports: $Exports<'flat'>;
+}
+declare module 'flat/test/test.js' {
+  declare module.exports: $Exports<'flat/test/test'>;
 }
