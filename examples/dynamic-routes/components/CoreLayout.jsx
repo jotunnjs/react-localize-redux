@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { localize, getTranslate, getActiveLanguage, Translate, setActiveLanguage } from 'react-localize-redux';
-import { getLanguages } from '../../../src/locale';
+import { localize, getTranslate, getActiveLanguage, Translate, setActiveLanguage, LocalizeContext } from 'react-localize-redux';
+import { getLanguages, initialize } from '../../../src/locale';
 import Tester from './Tester';
 
 const CoreLayout = ({ children, count, click, setActiveLanguage }) => {
@@ -16,7 +16,20 @@ const CoreLayout = ({ children, count, click, setActiveLanguage }) => {
   return (
     <div>
       <header>
-        <Tester />
+        {/* <Tester /> */}
+
+        <LocalizeContext.Consumer>
+          {({ dispatch }) => 
+            <button onClick={() => {
+              dispatch(initialize([
+                { name: 'English - new', code: 'en' }, 
+                { name: 'French - new', code: 'fr' }, 
+                { name: 'Spanish - new', code: 'es' }
+              ]))
+            }}>Click</button>
+          }
+        </LocalizeContext.Consumer>
+
         <Translate id="welcome-page" />
 
         <Translate>

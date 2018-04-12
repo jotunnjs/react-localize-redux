@@ -8,6 +8,7 @@ const LocalizeContext = React.createContext();
 // the translation data can be stored directly in the state if redux is being used
 // would be nice if there was a way to create a mock version of store to allow for using same API and reducers to update state
 
+
 export const withLocalize = WrappedComponent => {
 
   class LocalizedComponent extends Component {
