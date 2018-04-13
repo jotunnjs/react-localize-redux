@@ -1,5 +1,5 @@
 import React from 'react';
-import { initialize, addTranslation, LocalizeContext } from 'react-localize-redux';
+import { initialize, addTranslation, LocalizeContext, setActiveLanguage } from 'react-localize-redux';
 import { Article } from './Article';
 
 export class Main extends React.Component {
@@ -15,14 +15,31 @@ export class Main extends React.Component {
       { name: 'Spanish', code: 'es' }
     ]));
 
+    this.state = {
+      style: {
+        backgroundColor: 'red'
+      }
+    }
+
     
     this.props.dispatch(addTranslation(json));
+
+    setTimeout(() => {
+
+      // this.setState({
+      //   style: { backgroundColor: 'yellow' }
+      // });
+
+      this.props.dispatch(setActiveLanguage('fr'));
+
+
+    }, 3000);
   }
 
   render() {
     return (
       <div>
-        <h1>Hello</h1>
+        <h1 style={this.state.style}>Hello</h1>
 
         <Article />
       </div>

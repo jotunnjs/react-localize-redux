@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
-const LocalizeContext = React.createContext();
-
-// console.log(React.createContext);
+import { LocalizeContext } from './LocalizeContext';
 
 // the context can contain all the actions
 // the translation data can be stored directly in the state if redux is being used
@@ -11,20 +8,18 @@ const LocalizeContext = React.createContext();
 
 export const withLocalize = WrappedComponent => {
 
-  class LocalizedComponent extends Component {
-
-    constructor(props) {
-      super(props);
-
-      this.state = {
-      }
-    }
-
-    render() {
-      return (
-        <WrappedComponent {...this.props} />
-      );
-    }
+  const LocalizedComponent = props => {
+    console.log('props', props);
+    return (
+      <LocalizeContext.Consumer>
+         {context => 
+           <WrappedComponent { ...props }
+             { ...props }
+             { ...context }
+           />
+         }
+      </LocalizeContext.Consumer>
+    );
   }
 
   return LocalizedComponent;

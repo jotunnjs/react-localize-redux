@@ -274,7 +274,6 @@ export const setActiveLanguage = (languageCode: string): SetActiveLanguageAction
  * SELECTORS
  */
 export const getTranslations = (state: LocaleState): Translations => {
-  console.log('translations', state.translations);
   return state.translations;
 };
 
@@ -296,18 +295,18 @@ export const getActiveLanguage = (state: LocaleState): Language => {
  */
 export const translationsEqualSelector = createSelectorCreator(
   defaultMemoize,
-  (cur, prev) => {
+  (prev, cur) => {
     const prevKeys: any = typeof prev === "object" ? Object.keys(prev).toString() : undefined;
     const curKeys: any = typeof cur === "object" ? Object.keys(cur).toString() : undefined;
 
     const prevValues: any = typeof prev === "object" ? objectValuesToString(prev) : undefined;
     const curValues: any = typeof cur === "object" ? objectValuesToString(cur) : undefined;
 
-    const prevCacheValue = (!prevKeys || !prevValues) 
+    const prevCacheValue = (prevKeys !== undefined && prevValues !== undefined) 
       ? `${ prevKeys } - ${ prevValues }` 
       : prev;
 
-    const curCacheValue = (!curKeys || !curValues) 
+    const curCacheValue = (curKeys !== undefined && curValues !== undefined) 
       ? `${ curKeys } - ${ curValues }`
       : cur;
 
@@ -335,7 +334,7 @@ export const getTranslate: Selector<LocaleState, void, TranslateFunction> = crea
   getTranslationsForSpecificLanguage,
   getActiveLanguage,
   getOptions,
-  (translationsForActiveLanguage, getTranslationsForLanguage, activeLanguage, options) => {
+  (translationsForActiveLanguage, getTranslationsForLanguage, activeLanguage = {}, options) => {
     return (value, data = {}, optionsOverride = {}) => {
       const {defaultLanguage, ...rest} = optionsOverride;
       const translateOptions: Options = {...options, ...rest};
