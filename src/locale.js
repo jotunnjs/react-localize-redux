@@ -273,7 +273,10 @@ export const setActiveLanguage = (languageCode: string): SetActiveLanguageAction
 /**
  * SELECTORS
  */
-export const getTranslations = (state: LocaleState): Translations => state.translations;
+export const getTranslations = (state: LocaleState): Translations => {
+  console.log('translations', state.translations);
+  return state.translations;
+};
 
 export const getLanguages = (state: LocaleState): Language[] => state.languages;
 

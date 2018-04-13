@@ -11,7 +11,7 @@ export default env => {
     // ------------------------------------
     entry: fs.readdirSync(__dirname).reduce((entries, dir) => {
       if (fs.statSync(join(__dirname, dir)).isDirectory())
-        entries[dir] = join(__dirname, dir, 'app.js')
+        entries[dir] = join(__dirname, dir, 'app.jsx')
       return entries
     }, {}),
 

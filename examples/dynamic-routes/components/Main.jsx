@@ -1,5 +1,6 @@
 import React from 'react';
 import { initialize, addTranslation, LocalizeContext } from 'react-localize-redux';
+import { Article } from './Article';
 
 export class Main extends React.Component {
 
@@ -18,24 +19,12 @@ export class Main extends React.Component {
     this.props.dispatch(addTranslation(json));
   }
 
-  renderStuff(locale, translate) {
-    console.log('translations', locale.translations);
-
-    return locale.languages.length > 0
-      ? <h1>{translate('welcome-page')}</h1>
-      : <p>No languages yet!</p>;
-  }
-
   render() {
     return (
       <div>
         <h1>Hello</h1>
 
-        <LocalizeContext.Consumer>
-          {({ locale, translate }) => 
-            this.renderStuff(locale, translate)
-          }
-        </LocalizeContext.Consumer>
+        <Article />
       </div>
     );
   }
