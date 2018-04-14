@@ -1,5 +1,5 @@
 import React from 'react';
-import { withLocalize } from 'react-localize-redux';
+import { withLocalize, Translate } from 'react-localize-redux';
 import LanguageToggle from './LanguageToggle';
 import globalTranslations from './translations/global.json';
 
@@ -21,7 +21,9 @@ class Main extends React.Component {
     return (
       <div>
         <LanguageToggle />
-        <h1>{this.props.translate('title')}</h1>
+        <h1>
+          <Translate id="title">Title</Translate>
+        </h1>
       </div>
     );
   }
