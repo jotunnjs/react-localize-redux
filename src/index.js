@@ -1,19 +1,16 @@
 
-
 // @flow
-export { localize } from './Localize';
 export { Translate } from './Translate';
 export { withLocalize } from './withLocalize';
 export { LocalizeProvider } from './LocalizeProvider';
 export { LocalizeContext } from './LocalizeContext';
 
 export { 
-  localeReducer,
+  localizeReducer,
   
   initialize,
   addTranslation,
   addTranslationForLanguage,
-  setLanguages,
   setActiveLanguage,
 
   getTranslate,
@@ -21,4 +18,4 @@ export {
   getLanguages,
   getTranslations,
   getOptions
-} from './locale';
+} from './localize';

@@ -9,7 +9,6 @@ import { LocalizeContext } from './LocalizeContext';
 export const withLocalize = WrappedComponent => {
 
   const LocalizedComponent = props => {
-    console.log('props', props);
     return (
       <LocalizeContext.Consumer>
          {context => 

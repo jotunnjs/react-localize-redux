@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createSelector } from 'reselect';
-import { localeReducer, getTranslate, initialize, addTranslation, addTranslationForLanguage, setActiveLanguage, getLanguages, getActiveLanguage, getOptions } from './locale';
+import { localizeReducer, getTranslate, initialize, addTranslation, addTranslationForLanguage, setActiveLanguage, getLanguages, getActiveLanguage, getOptions } from './localize';
 import { LocalizeContext } from './LocalizeContext';
 import { storeDidChange } from './utils';
 
@@ -45,7 +45,7 @@ export class LocalizeProvider extends Component {
     );
 
     this.state = {
-      locale: localeReducer(undefined, {})
+      localize: localizeReducer(undefined, {})
     };
   } 
 
@@ -60,26 +60,26 @@ export class LocalizeProvider extends Component {
   }
 
   onStateDidChange(prevState) {
-    // TODO: add a check to ensure that locale state exists?
-    // TODO: rename locale to localize
-    const prevLocaleState = prevState.locale
-    const curLocaleState = this.props.store.getState().locale;
+    // TODO: add a check to ensure that localize state exists?
+    
+    const prevLocalizeState = prevState.localize
+    const curLocalizeState = this.props.store.getState().localize;
 
-    const prevActiveLanguage = getActiveLanguage(prevLocaleState);
-    const curActiveLanguage = getActiveLanguage(curLocaleState);
+    const prevActiveLanguage = getActiveLanguage(prevLocalizeState);
+    const curActiveLanguage = getActiveLanguage(curLocalizeState);
 
-    const prevOptions = getOptions(prevLocaleState);
-    const curOptions = getOptions(curLocaleState);
+    const prevOptions = getOptions(prevLocalizeState);
+    const curOptions = getOptions(curLocalizeState);
 
-    const prevTranslations = getTranslationsForActiveLanguage(prevLocaleState);
-    const curTranslations = getTranslationsForActiveLanguage(curLocaleState);
+    const prevTranslations = getTranslationsForActiveLanguage(prevLocalizeState);
+    const curTranslations = getTranslationsForActiveLanguage(curLocalizeState);
 
     const hasActiveLangaugeChanged = (prevActiveLanguage.code !== curActiveLanguage.code);
     const hasOptionsChanged = (prevOptions !== curOptions);
     const hasTranslationsChanged = (prevTranslations !== curTranslations);
 
     if (hasActiveLangaugeChanged || hasOptionsChanged || hasTranslationsChanged) {
-      this.setState({ locale: curLocaleState });
+      this.setState({ localize: curLocalizeState });
     }
   }
 
@@ -88,13 +88,13 @@ export class LocalizeProvider extends Component {
 
     this.setState((prevState) => {
       return {
-        locale: localeReducer(prevState.locale, action)
+        localize: localizeReducer(prevState.localize, action)
       }
     });
   }
 
   render() {
-    this.contextProps = this.getContextPropsSelector(this.state.locale);
+    this.contextProps = this.getContextPropsSelector(this.state.localize);
 
     return (
       <LocalizeContext.Provider value={this.contextProps}>
