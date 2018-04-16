@@ -2,8 +2,8 @@ import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Map } from 'immutable';
-import { localeReducer, getTranslate, getLanguages, getActiveLanguage } from '../src';
-import { defaultTranslateOptions } from '../src/locale';
+import { localizeReducer, getTranslate, getLanguages, getActiveLanguage } from '../src';
+import { defaultTranslateOptions } from '../src/localize';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -30,7 +30,7 @@ describe('<Translate />', () => {
   let defaultContext = {};
 
   const getTranslateWithContext = (state = initialState) => {
-    const localizeState = localeReducer(state, {});
+    const localizeState = localizeReducer(state, {});
 
     defaultContext = {
       translate: getTranslate(localizeState),

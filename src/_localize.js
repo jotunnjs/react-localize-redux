@@ -95,7 +95,7 @@ type BaseAction<T, P> = {
 
 export type InitializeAction = BaseAction<'@@localize/INITIALIZE', InitializePayload>;
 export type AddTranslationAction = BaseAction<'@@localize/ADD_TRANSLATION', AddTranslationPayload>;
-export type AddTranslationForLanguageAction = BaseAction<'@@localize/ADD_TRANSLATION_FOR_LANGUGE', AddTranslationForLanguagePayload>;
+export type AddTranslationForLanguageAction = BaseAction<'@@localize/ADD_TRANSLATION_FOR_LANGUAGE', AddTranslationForLanguagePayload>;
 export type SetActiveLanguageAction = BaseAction<'@@localize/SET_ACTIVE_LANGUAGE', SetActiveLanguagePayload>;
 
 export type Action = BaseAction<
@@ -116,8 +116,7 @@ export type ActionDetailed = Action & {
  */
 export const INITIALIZE                   = '@@localize/INITIALIZE';
 export const ADD_TRANSLATION              = '@@localize/ADD_TRANSLATION';
-export const ADD_TRANSLATION_FOR_LANGUGE  = '@@localize/ADD_TRANSLATION_FOR_LANGUGE';
-export const SET_LANGUAGES                = '@@localize/SET_LANGUAGES';
+export const ADD_TRANSLATION_FOR_LANGUAGE  = '@@localize/ADD_TRANSLATION_FOR_LANGUAGE';
 export const SET_ACTIVE_LANGUAGE          = '@@localize/SET_ACTIVE_LANGUAGE';
 export const TRANSLATE                    = '@@localize/TRANSLATE';
 
@@ -127,7 +126,6 @@ export const TRANSLATE                    = '@@localize/TRANSLATE';
 export function languages(state: Language[] = [], action: Action): Language[] {
   switch (action.type) {
     case INITIALIZE:
-    case SET_LANGUAGES:
       const options = action.payload.options || {};
       const activeLanguage = action.payload.activeLanguage || options.defaultLanguage;
       return action.payload.languages.map((language, index) => {
@@ -163,7 +161,7 @@ export function translations(state: Translations = {}, action: ActionDetailed): 
         ...state,
         ...flatten(translations, { safe: true })
       };
-    case ADD_TRANSLATION_FOR_LANGUGE:
+    case ADD_TRANSLATION_FOR_LANGUAGE:
     const languageIndex = action.languageCodes.indexOf(action.payload.language);
     const flattenedTranslations = languageIndex >= 0 ? flatten(action.payload.translation) : {};
       // convert single translation data into multiple
@@ -240,7 +238,7 @@ export const addTranslation = (translation: MultipleLanguageTranslation): AddTra
 });
 
 export const addTranslationForLanguage = (translation: SingleLanguageTranslation, language: string): AddTranslationForLanguageAction => ({
-  type: ADD_TRANSLATION_FOR_LANGUGE,
+  type: ADD_TRANSLATION_FOR_LANGUAGE,
   payload: { translation, language }
 });
 

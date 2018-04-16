@@ -16,7 +16,8 @@ describe('locale utils', () => {
 
     it('should return element with HTML from translation rendered', () => {
       const translations = { test: '<h1>Here</h1> is my <strong>test</strong>' };
-      const wrapper = shallow(utils.getLocalizedElement('test', translations, null, defaultLanguage));
+      const options = { renderInnerHtml: true };
+      const wrapper = shallow(utils.getLocalizedElement('test', translations, null, defaultLanguage, options));
       
       expect(wrapper.find('span').exists()).toBe(true);
       expect(wrapper.html()).toEqual(`<span>${translations.test}</span>`);
