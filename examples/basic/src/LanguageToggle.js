@@ -1,12 +1,17 @@
 import React from 'react';
 import { withLocalize } from 'react-localize-redux';
+import './Main.css';
 
-const LanguageToggle = ({ languages,  setActiveLanguage }) => {
+const LanguageToggle = ({ languages,  activeLanguage, setActiveLanguage }) => {
+  const getClass = (languageCode) => {
+    return languageCode === activeLanguage.code ? 'active' : ''
+  };
+
   return (
-    <ul>
+    <ul className="selector">
       {languages.map(lang => 
         <li key={ lang.code }>
-          <button onClick={() => setActiveLanguage(lang.code)}>{`${lang.name} - (${lang.code})`}</button>        
+          <button className={getClass(lang.code)} onClick={() => setActiveLanguage(lang.code)}>{ lang.name }</button>        
         </li>
       )}
     </ul>
